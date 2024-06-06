@@ -20,6 +20,7 @@ https://stackoverflow.com/questions/4726040/javascript-adding-zeros-to-the-begin
                 color: #ffffff;
             }
             body {
+                overflow: hidden;
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -29,29 +30,39 @@ https://stackoverflow.com/questions/4726040/javascript-adding-zeros-to-the-begin
 
                 font-size: 42pt;
                 text-align: center;
+
+                background-color: black;
             }
             
             #video {
                 position: fixed;
                 right: 0;
                 bottom: 0;
-                min-width: 100%;
-                min-height: 100%;
+                width: 100vw;
+                min-height: 100vh;
+
+                z-index: -100;
             }
             
-            .content {
-                position: fixed;
-                bottom: 40%;
-            }
-
             #timer {
-                /* display: flex; */
                 display: grid;
                 align-items: center;
-                grid-template-columns: 15vw 15vw 15vw ;
+                row-gap: 1em;
+                justify-items: center;
                 grid-template-areas:
-                "minutes  spacerL  seconds"
-                "unitMin  .        unitSec";
+                "head     head     head"
+                "minutes  spacer   seconds"
+                "unitMin  .        unitSec"
+                "foot     foot     foot";
+            }
+
+            #minutes {
+                grid-area: minutes;
+                width: 1em;
+            }
+            #seconds {
+                grid-area: seconds;
+                width: 1em;
             }
 
             p {
@@ -62,6 +73,9 @@ https://stackoverflow.com/questions/4726040/javascript-adding-zeros-to-the-begin
                 display: flex;
                 justify-content: center;
                 align-items: center;
+                
+                width: 100%;
+                height: 100%;
             }
             
             .liner {
@@ -81,30 +95,29 @@ https://stackoverflow.com/questions/4726040/javascript-adding-zeros-to-the-begin
         <video autoplay muted loop id="video">
             <source src="./Animation_CampusDesign_Background2.mp4" />
         </video>
-        <div id="timer" class="content">
-            <!-- <p id="hours" class="time">hours</p> -->
-            <!-- <p>:</p> -->
-            <p id="minutes" class="time">minutes</p>
-            <div class="center">
-                <p class="liner"></p>
+        <div class="center">
+            <div id="timer">
+                <div style="grid-area: head;">
+                    <h1>Prijsuitrijking start in</h1> 
+                </div>
+                <p id="minutes" class="time">minutes</p>
+                <div class="center">
+                    <p class="liner"></p>
+                </div>
+                <p id="seconds" class="time">seconds</p>
+                <p>min</p>
+                <br />
+                <p>sec</p>
+                
+                <div style="grid-area: foot;">
+                    <p>kom snel naar buiten!</p>
+                </div>
             </div>
-            <p id="seconds" class="time">seconds</p>
-            <!-- <div class="center">
-                <p class="liner"></p>
-            </div>
-            <p id="miliseconds" class="time">miliseconds</p> -->
-            <!-- <p>hours</p> -->
-            <!-- <br> -->
-            <p>min</p>
-            <br />
-            <p>sec</p>
-            <!-- <br /> -->
-            <!-- <p>milli</p> -->
         </div>
 
         <script>
             // current settings
-            const countdown_date = new Date("2024-06-05T16:24:00");
+            const countdown_date = new Date("2024-06-10T16:30:00"); // local timezone
 
             const doc_hours = document.getElementById("hours");
             const doc_minutes = document.getElementById("minutes");
