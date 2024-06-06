@@ -1,4 +1,4 @@
-<!-- 
+<!-- SOURCES
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date#examples 
 https://developer.mozilla.org/en-US/docs/Web/API/setInterval 
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Remainder
@@ -11,8 +11,7 @@ https://stackoverflow.com/questions/4726040/javascript-adding-zeros-to-the-begin
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
-
+        <title>Countdown</title>
         <style>
             @import url("https://fonts.googleapis.com/css2?family=Alata&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
             * {
@@ -93,7 +92,7 @@ https://stackoverflow.com/questions/4726040/javascript-adding-zeros-to-the-begin
     </head>
     <body>
         <video autoplay muted loop id="video">
-            <source src="./Animation_CampusDesign_Background2.mp4" />
+            <source src="./background_video.mp4" />
         </video>
         <div class="center">
             <div id="timer">
@@ -116,14 +115,18 @@ https://stackoverflow.com/questions/4726040/javascript-adding-zeros-to-the-begin
         </div>
 
         <script>
-            // current settings
-            const countdown_date = new Date("2024-06-10T16:30:00"); // local timezone
+            // settings
+            const countdown_date = new Date("2024-06-10T16:30:00"); // system time
+            const update_interval = 99; // in miliseconds
 
+
+            // get elements
             const doc_hours = document.getElementById("hours");
             const doc_minutes = document.getElementById("minutes");
             const doc_seconds = document.getElementById("seconds");
             const doc_miliseconds = document.getElementById("miliseconds");
 
+            // start timer update interval
             var timer = setInterval(() => {
                 const current_date = new Date();
                 const difference_date = countdown_date - current_date;
@@ -142,6 +145,7 @@ https://stackoverflow.com/questions/4726040/javascript-adding-zeros-to-the-begin
                 );
                 let miliseconds = Math.floor(difference_date % 100);
 
+                //
                 hours = hours.toString().padStart(1, "0");
                 minutes = minutes.toString().padStart(1, "0");
                 miliseconds = miliseconds.toString().padStart(2, "0");
@@ -162,7 +166,7 @@ https://stackoverflow.com/questions/4726040/javascript-adding-zeros-to-the-begin
                 doc_minutes.innerText = minutes;
                 doc_seconds.innerText = seconds;
                 // doc_miliseconds.innerText = miliseconds;
-            }, 51);
+            }, update_interval);
         </script>
     </body>
 </html>
